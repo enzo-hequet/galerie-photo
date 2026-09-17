@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Galerie Publique{% endblock %}
+
+{% block body %}
+    <h1>Galerie Publique</h1>
+
+    {% if photos is empty %}
+        <p>Aucune photo n'est disponible pour le moment.</p>
+    {% else %}
+        <div class="gallery">
+            {% for photo in photos %}
+                <div class="photo-card">
+                    <img src="{{ asset('uploads/photos/' ~ photo.filename) }}" alt="Photo">
+                    <p>Publié par : {{ photo.owner.pseudo }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
