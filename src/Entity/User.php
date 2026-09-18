@@ -43,6 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'owner', orphanRemoval: true)]
     private Collection $photos;
 
+    #[ORM\Column]
+    private ?int $age = null;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
@@ -161,6 +164,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $photo->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(int $age): static
+    {
+        $this->age = $age;
 
         return $this;
     }
